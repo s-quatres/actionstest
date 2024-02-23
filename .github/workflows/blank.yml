@@ -48,7 +48,7 @@ jobs:
       - uses: cloudposse/github-action-matrix-outputs-read@main
         id: read
         with:
-          matrix-step-name: build
+          matrix-step-name: test1
     outputs:
       result: "${{ steps.read.outputs.result }}"
       
