@@ -43,4 +43,4 @@ jobs:
       - name: Test
         run: |
           echo "Release step."
-          echo ${{ fromJson(needs.test-addon-with-clusters.outputs) }}
+          echo ${{ fromJson(needs.test-addon-with-clusters.outputs.test) }}
