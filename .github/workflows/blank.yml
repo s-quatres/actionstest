@@ -22,8 +22,6 @@ jobs:
       matrix:
         #ersion: ${{ fromJson(needs.find-supported-versions.outputs.versions) }}
         version: [1.28,1.29]
-    outputs:
-      ${{ matrix.version }}test: ${{ steps.test1.outputs.test }}
     env:
       K8S_VERSION: ${{ matrix.version }}
       FLCENV_PREFIX: dynatrace-operator-addon-test-
@@ -31,13 +29,31 @@ jobs:
       - name: Test1
         id: test1
         run: |
-          echo "loc1" >> "${RUNNER_TEMP}/test.txt"
-          echo test="Matrix step $K8S_VERSION." >> $GITHUB_OUTPUT
-          printenv
-          cat $GITHUB_OUTPUT
-
+          echo "Hello"
+          echo "result=$K8S_VERIONS"
+      - uses: cloudposse/github-action-matrix-outputs-write@main
+        id: out
+        with:
+          matrix-step-name: ${{ github.job }}
+          matrix-key: ${{ matrix.version }}
+          outputs: |-
+            result: ${{ steps.test1.outputs.result }}
+            ## Multiline string
+            
+  ## Read matrix outputs 
+  read:
+    runs-on: ubuntu-latest
+    needs: [test-addon-with-clusters]
+    steps:
+      - uses: cloudposse/github-action-matrix-outputs-read@main
+        id: read
+        with:
+          matrix-step-name: build
+    outputs:
+      result: "${{ steps.read.outputs.result }}"
+      
   create_release:
-    needs: test-addon-with-clusters
+    needs: read
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -45,9 +61,6 @@ jobs:
         run: |
           printenv
           echo "Release step."
-          echo ${{ needs.test-addon-with-clusters.outputs.test }}
-          echo ${{ fromJson(needs.test-addon-with-clusters.outputs) }}
-          echo ${{ needs.test-addon-with-clusters[0] }}
-          echo ${{ needs.test-addon-with-clusters }}
+          echo ${{ fromJson(needs.read.outputs.result).version }}
           printenv
           cat $GITHUB_OUTPUT
