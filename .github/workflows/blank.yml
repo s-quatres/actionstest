@@ -61,3 +61,4 @@ jobs:
         run: |
           echo ${{ fromJson(needs.read.outputs.result).ver }}
           echo ${{ fromJson(needs.read.outputs.result) }}
+          echo ${{ needs.read.outputs.result }}
