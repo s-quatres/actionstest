@@ -49,7 +49,7 @@ jobs:
           echo ${{ needs.test-addon-with-clusters[0].outputs }}
           echo ${{ needs.test-addon-with-clusters[0] }}
           echo ${{ needs.test-addon-with-clusters }}
-          cat "loc1" >> test.txt
-          cat "tmp1" >> /tmp/tmp1.txt
+          cat test.txt
+          cat /tmp/tmp1.txt
           printenv
           cat $GITHUB_OUTPUT
