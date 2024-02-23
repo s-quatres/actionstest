@@ -24,6 +24,7 @@ jobs:
         version: [1.28,1.29]
     outputs:
       result: ${{ steps.test1.outputs.test }}
+      ${{ env.K8S_VERSION }}_envtest: ${{ steps.test1.outputs.test }}
     env:
       K8S_VERSION: ${{ matrix.version }}
       FLCENV_PREFIX: dynatrace-operator-addon-test-
@@ -43,4 +44,4 @@ jobs:
       - name: Test
         run: |
           echo "Release step."
-          echo ${{ needs.test-addon-with-clusters.outputs }}
+          echo ${{ fromJson(needs.test-addon-with-clusters.outputs) }}
