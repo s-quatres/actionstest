@@ -30,7 +30,7 @@ jobs:
         id: test1
         run: |
           echo "Hello"
-          echo "ver=$K8S_VERSION"
+          echo "ver=$K8S_VERSION" >> $GITHUB_OUTPUT
       - uses: cloudposse/github-action-matrix-outputs-write@main
         id: out
         with:
@@ -62,5 +62,3 @@ jobs:
           printenv
           echo "Release step."
           echo ${{ fromJson(needs.read.outputs.result).ver }}
-          printenv
-          cat $GITHUB_OUTPUT
