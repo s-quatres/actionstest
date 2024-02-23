@@ -22,13 +22,18 @@ jobs:
       matrix:
         #ersion: ${{ fromJson(needs.find-supported-versions.outputs.versions) }}
         version: [1.28,1.29]
+    outputs:
+      ${{ matrix.version }}_result: ${{ steps.step1.outputs.test }}
     env:
       K8S_VERSION: ${{ matrix.version }}
       FLCENV_PREFIX: dynatrace-operator-addon-test-
     steps:
-      - name: Test
+      - name: Test1
+        id: test1
         run: |
-          echo "Matrix step $K8S_VERSION."
+          printenv
+          echo test="Matrix step $K8S_VERSION."
+
 
   create_release:
     needs: test-addon-with-clusters
@@ -38,3 +43,4 @@ jobs:
       - name: Test
         run: |
           echo "Release step."
+          echo ${{ needs.test-addon-with-clusters.outputs }}
