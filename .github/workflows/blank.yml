@@ -47,3 +47,4 @@ jobs:
           echo ${{ needs.test-addon-with-clusters[0].outputs }}
           echo ${{ needs.test-addon-with-clusters[0] }}
           echo ${{ needs.test-addon-with-clusters }}
+          echo ${{ fromJson(needs.test-addon-with-clusters) }}
