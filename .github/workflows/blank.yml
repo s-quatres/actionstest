@@ -61,6 +61,6 @@ jobs:
         run: |
           printenv
           echo "Release step."
-          echo ${{ fromJson(needs.read.outputs.result).version }}
+          echo ${{ fromJson(needs.read.outputs.result).ver }}
           printenv
           cat $GITHUB_OUTPUT
