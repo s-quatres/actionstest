@@ -31,8 +31,7 @@ jobs:
       - name: Test1
         id: test1
         run: |
-          echo "loc1" >> test.txt
-          echo "tmp1" >> /tmp/tmp1.txt
+          echo "loc1" >> "${RUNNER_TEMP}/test.txt"
           echo test="Matrix step $K8S_VERSION." >> $GITHUB_OUTPUT
           printenv
           cat $GITHUB_OUTPUT
@@ -44,12 +43,12 @@ jobs:
     steps:
       - name: Test
         run: |
+          printenv
           echo "Release step."
           echo ${{ needs.test-addon-with-clusters[0].outputs.test }}
           echo ${{ needs.test-addon-with-clusters[0].outputs }}
           echo ${{ needs.test-addon-with-clusters[0] }}
           echo ${{ needs.test-addon-with-clusters }}
-          cat test.txt
-          cat /tmp/tmp1.txt
+          cat "${RUNNER_TEMP}/test.txt"
           printenv
           cat $GITHUB_OUTPUT
