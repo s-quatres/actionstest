@@ -30,14 +30,14 @@ jobs:
         id: test1
         run: |
           echo "Hello"
-          echo "result=$K8S_VERIONS"
+          echo "ver=$K8S_VERSION"
       - uses: cloudposse/github-action-matrix-outputs-write@main
         id: out
         with:
           matrix-step-name: ${{ github.job }}
           matrix-key: ${{ matrix.version }}
           outputs: |-
-            result: ${{ steps.test1.outputs.result }}
+            ver: ${{ steps.test1.outputs.ver }}
             ## Multiline string
             
   ## Read matrix outputs 
