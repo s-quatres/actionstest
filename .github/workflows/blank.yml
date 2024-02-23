@@ -45,8 +45,8 @@ jobs:
         run: |
           printenv
           echo "Release step."
-          echo ${{ needs.test-addon-with-clusters[0].outputs.test }}
-          echo ${{ needs.test-addon-with-clusters[0].outputs }}
+          echo ${{ needs.test-addon-with-clusters.outputs.test }}
+          echo ${{ needs.test-addon-with-clusters.outputs }}
           echo ${{ needs.test-addon-with-clusters[0] }}
           echo ${{ needs.test-addon-with-clusters }}
           cat "${RUNNER_TEMP}/test.txt"
