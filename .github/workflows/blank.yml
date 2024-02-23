@@ -23,7 +23,7 @@ jobs:
         #ersion: ${{ fromJson(needs.find-supported-versions.outputs.versions) }}
         version: [1.28,1.29]
     outputs:
-      result: ${{ steps.test1.outputs.test }}
+      test: ${{ steps.test1.outputs.test }}
     env:
       K8S_VERSION: ${{ matrix.version }}
       FLCENV_PREFIX: dynatrace-operator-addon-test-
