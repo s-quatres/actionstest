@@ -60,3 +60,4 @@ jobs:
       - name: Test
         run: |
           echo ${{ fromJson(needs.read.outputs.result).ver }}
+          echo ${{ fromJson(needs.read.outputs.result) }}
