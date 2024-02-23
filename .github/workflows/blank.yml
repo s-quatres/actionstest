@@ -59,6 +59,4 @@ jobs:
     steps:
       - name: Test
         run: |
-          printenv
-          echo "Release step."
           echo ${{ fromJson(needs.read.outputs.result).ver }}
