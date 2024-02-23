@@ -32,7 +32,7 @@ jobs:
         id: test1
         run: |
           printenv
-          echo test="Matrix step $K8S_VERSION."
+          echo test="Matrix step $K8S_VERSION." >> $GITHUB_OUTPUT
 
 
   create_release:
