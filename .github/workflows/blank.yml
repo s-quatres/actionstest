@@ -31,9 +31,9 @@ jobs:
       - name: Test1
         id: test1
         run: |
-          printenv
           echo test="Matrix step $K8S_VERSION." >> $GITHUB_OUTPUT
-
+          printenv
+          cat $GITHUB_OUTPUT
 
   create_release:
     needs: test-addon-with-clusters
@@ -47,4 +47,5 @@ jobs:
           echo ${{ needs.test-addon-with-clusters[0].outputs }}
           echo ${{ needs.test-addon-with-clusters[0] }}
           echo ${{ needs.test-addon-with-clusters }}
-          echo ${{ fromJson(needs.test-addon-with-clusters) }}
+          printenv
+          cat $GITHUB_OUTPUT
