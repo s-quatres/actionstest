@@ -34,8 +34,9 @@ jobs:
     steps:
       - name: Test
         run: |
-          for ver in $VERSIONS; do echo $ver; done;
-          echo $VERSIONS | jq -c
-          echo $VERSIONS | jq -r -c
+          versions=${VERSIONS//,/ }
+          versions=$(echo $versions | tr -d "[]")
+          for i in ${versions[@]}; do echo $i; done;
+          
           
           
